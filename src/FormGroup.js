@@ -1,20 +1,14 @@
 import React from 'react';
-import Input from './Input';
 
-const FormGroup = (props) =>
+const FormGroup = ({ label, children }) =>
   <div className="form-group">
-    <label>{props.label}</label>
-    <Input
-      type={props.type}
-      className="form-control"
-      placeholder={props.placeholder}
-    />
+    <label>{label}</label>
+    {children}
   </div>;
 
 FormGroup.propTypes = {
   label: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired,
-  placeholder: React.PropTypes.string.isRequired
+  children: React.PropTypes.node.isRequired
 };
 
 export default FormGroup;
