@@ -1,9 +1,10 @@
 import React from 'react';
+import Input from './Input';
 
 const FormGroup = (props) =>
   <div className="form-group">
     <label>{props.label}</label>
-    <input
+    <Input
       type={props.type}
       className="form-control"
       placeholder={props.placeholder}
