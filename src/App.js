@@ -1,6 +1,7 @@
 import React from 'react';
 import FormGroup from './FormGroup';
 import Input from './Input';
+import RadioButton from './RadioButton';
 
 const App = () =>
   <div>
@@ -19,6 +20,9 @@ const App = () =>
           className="form-control"
           placeholder="Password"
         />
+      </FormGroup>
+      <FormGroup label="Gender">
+        <RadioButton labels={['female', 'male']} />
       </FormGroup>
     </div>
     <div className="col-md-4">TODO</div>
