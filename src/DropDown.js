@@ -11,24 +11,24 @@ class Dropdown extends React.Component {
   }
 
   state = {
-    choosen: '',
     country: 'Portugal'
   }
 
-  handleCountryChange = (event) => {
+  handleClick = (event) => {
     this.setState({ country: event.target.value });
   }
-
-  /* toggleVisible() {
-    this.setState({ isVisible: !this.state.isVisible });
-  }*/
 
   renderListItems() {
     const items = [];
     for (let i = 0; i < this.props.labels.length; i++) {
       const item = this.props.labels[i];
       items.push(
-        <div ref={item} onClick={this.props.onChange} value={item} key={i}>{item}</div>
+        <div
+          ref={item}
+          onClick={this.props.onChange}
+          value={item}
+          key={i}
+        >{item}</div>
       );
     }
 
@@ -48,7 +48,12 @@ class Dropdown extends React.Component {
           {this.state.country}
           <span className="caret"></span>
         </Button>
-        <ul id="ddown" className="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <ul
+          id="ddown"
+          onClick={this.handleClick}
+          className="dropdown-menu"
+          aria-labelledby="dropdownMenu1"
+        >
           {this.renderListItems()}
         </ul>
       </div>
