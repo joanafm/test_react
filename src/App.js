@@ -162,16 +162,18 @@ class App extends React.Component {
                 onChange={this.handleCountryChange}
               />
             </FormGroup>
-            <Button
-              id="dropdownMenu1"
-              aria-haspopup="true"
-              aria-expanded="true"
-              onClick={this.handleSubmitData}
-            >Submit</Button>
+            <div id="submitButton">
+              <Button
+                id="dropdownMenu1"
+                aria-haspopup="true"
+                aria-expanded="true"
+                onClick={this.handleSubmitData}
+              >Submit</Button>
+            </div>
           </form>
         </div>
         <div className="col-md-4">
-          {this.renderText()}
+          <div id="finalText">{this.renderText()}</div>
         </div>
       </div>
     );

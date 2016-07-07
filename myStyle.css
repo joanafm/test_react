@@ -1,0 +1,29 @@
+body{
+  font-family: "Verdana", Geneva, sans-serif;
+}
+
+form{
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background-color: #F0F8FF;
+  border-radius: 15px;
+  border: 2px solid #20B2AA;
+  padding: 50px;
+}
+
+.form-group, #submitButton{
+  margin-top: 50px;
+}
+
+#finalText{
+  position: fixed;
+  margin-top: 200px;
+  margin-left: 50px;
+  width: 300px;
+  text-align: center;
+  font-size: 16px;
+  background-color: #F0F8FF;
+  border-radius: 15px;
+  border: 2px solid #20B2AA;
+  padding: 50px;
+}
