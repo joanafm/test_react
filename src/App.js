@@ -12,8 +12,7 @@ class App extends React.Component {
     country: 'Portugal',
     gender: '',
     name: '',
-    password: '',
-    submited: false
+    password: ''
   }
 
   handleNameChange = (event) => {
@@ -32,14 +31,19 @@ class App extends React.Component {
     this.setState({ country: event.target.value });
   }
 
-  submitData = () => {
-    this.setState({ submited: true });
-    if (this.state.name === '') {
-      console.log('The user did not set a name.');
-    } if (this.state.password === '') {
-      console.log('The user did not ser a password');
-    } if (this.state.gender === '') {
-      console.log('The user did not set a gender');
+  handleSubmitData = () => {
+    const patt1 = new RegExp('[^a-zA-Z0-9]');
+    const patt2 = new RegExp('[a-zA-Z]');
+    const patt3 = new RegExp('[0-9]');
+    if (this.state.name === '' ||
+      this.state.password === '' ||
+      patt1.test(this.state.password) ||
+      this.state.password.length < 6 ||
+      !patt2.test(this.state.password) ||
+      !patt3.test(this.state.password) ||
+      this.state.gender === ''
+    ) {
+      console.log('The login form has errors.');
     } else {
       console.log(
         `name: ${this.state.name}, gender: ${this.state.gender}, country: ${this.state.country}`
@@ -47,17 +51,48 @@ class App extends React.Component {
     }
   }
 
-  handleAlert() {
+  handleAlertName() {
     if (this.state.name === '') {
       return <Alert type="alert alert-danger" label="You need to write your name." />;
-    } else if (this.state.password === '') {
-      return <Alert type="alert alert-danger" label="You need to set a password." />;
+    }
+    return '';
+  }
+
+  handleAlertPassword() {
+    if (this.state.password === '') {
+      return (
+        <Alert
+          type="alert alert-danger"
+          label="You need to set a password. Your password needs to
+          have at least 6 characters, and can only contain letters and numbers."
+        />
+      );
     } else if (this.state.password !== '') {
-      // return <Alert type="alert alert-danger" label="VERIFICAR PASSWORD" />;
-    } else if (this.state.gender === '') {
+      const patt1 = new RegExp('[^a-zA-Z0-9]');
+      const patt2 = new RegExp('[a-zA-Z]');
+      const patt3 = new RegExp('[0-9]');
+      if (
+        patt1.test(this.state.password) ||
+        this.state.password.length < 6 ||
+        !patt2.test(this.state.password) ||
+        !patt3.test(this.state.password)
+      ) {
+        return (
+          <Alert
+            type="alert alert-danger"
+            label="Your password needs to have at least 6
+              characters, and can only contain letters and numbers."
+          />);
+      }
+    }
+    return '';
+  }
+
+  handleAlertGender() {
+    if (this.state.gender === '') {
       return <Alert type="alert alert-danger" label="You need to select your gender." />;
     }
-    return <Alert type="alert alert-success" label="You can now submit your data." />;
+    return '';
   }
 
   renderText() {
@@ -101,6 +136,7 @@ class App extends React.Component {
                 placeholder="Name"
                 onChange={this.handleNameChange}
               />
+              {this.handleAlertName()}
             </FormGroup>
             <FormGroup label="Password">
               <Input
@@ -109,6 +145,7 @@ class App extends React.Component {
                 placeholder="Password"
                 onChange={this.handlePasswordChange}
               />
+              {this.handleAlertPassword()}
             </FormGroup>
             <FormGroup label="Gender">
               <RadioButton
@@ -116,6 +153,7 @@ class App extends React.Component {
                 name="gender"
                 onChange={this.handleGenderChange}
               />
+              {this.handleAlertGender()}
             </FormGroup>
             <FormGroup label="Country">
               <DropDown
@@ -128,9 +166,8 @@ class App extends React.Component {
               id="dropdownMenu1"
               aria-haspopup="true"
               aria-expanded="true"
-              onClick={this.submitData}
+              onClick={this.handleSubmitData}
             >Submit</Button>
-            {this.handleAlert()}
           </form>
         </div>
         <div className="col-md-4">
