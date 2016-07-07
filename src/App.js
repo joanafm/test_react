@@ -3,6 +3,7 @@ import FormGroup from './FormGroup';
 import Input from './Input';
 import RadioButton from './RadioButton';
 import DropDown from './DropDown';
+import Button from './Button';
 
 class App extends React.Component {
 
@@ -10,7 +11,8 @@ class App extends React.Component {
     name: '',
     gender: '',
     password: '',
-    country: ''
+    country: 'Portugal',
+    sex: ''
   }
 
   handleNameChange = (event) => {
@@ -27,6 +29,31 @@ class App extends React.Component {
 
   handleCountryChange = (event) => {
     this.setState({ country: event.target.value });
+  }
+
+  submitData = () => {
+    if (this.state.name === '') {
+      console.log('The user did not set a name.');
+    } if (this.state.password === '') {
+      console.log('The user did not ser a password');
+    } if (this.state.gender === '') {
+      console.log('The user did not set a gender');
+    } else {
+      console.log(
+        `name: ${this.state.name}, gender: ${this.state.gender}, country: ${this.state.country}`
+      );
+    }
+  }
+
+  renderText() {
+    let text = `My name is ${this.state.name}.`;
+    if (this.state.gender === 'Female') {
+      text += 'I am a girl.';
+    } else if (this.state.gender === 'Male') {
+      text += 'I am a boy.';
+    }
+    text += `I am from ${this.state.country}.`;
+    return text;
   }
 
   render() {
@@ -53,7 +80,7 @@ class App extends React.Component {
             </FormGroup>
             <FormGroup label="Gender">
               <RadioButton
-                labels={['female', 'male', 'other']}
+                labels={['Female', 'Male', 'Other']}
                 name="gender"
                 onChange={this.handleGenderChange}
               />
@@ -65,12 +92,16 @@ class App extends React.Component {
                 onChange={this.handleCountryChange}
               />
             </FormGroup>
+            <Button
+              id="dropdownMenu1"
+              aria-haspopup="true"
+              aria-expanded="true"
+              onClick={this.submitData}
+            >Submit</Button>
           </form>
         </div>
         <div className="col-md-4">
-          My name is {this.state.name}.
-          My gender is {this.state.gender}.
-          I am from {this.state.country}.
+          {this.renderText()}
         </div>
       </div>
     );
