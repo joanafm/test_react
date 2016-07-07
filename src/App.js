@@ -2,13 +2,15 @@ import React from 'react';
 import FormGroup from './FormGroup';
 import Input from './Input';
 import RadioButton from './RadioButton';
+import DropDown from './DropDown';
 
 class App extends React.Component {
 
   state = {
     name: '',
     gender: '',
-    password: ''
+    password: '',
+    country: ''
   }
 
   handleNameChange = (event) => {
@@ -20,7 +22,11 @@ class App extends React.Component {
   }
 
   handleGenderChange = (event) => {
-    console.log(event.target);
+    this.setState({ gender: event.target.value });
+  }
+
+  handleCountryChange = (event) => {
+    this.setState({ country: event.target.value });
   }
 
   render() {
@@ -52,11 +58,19 @@ class App extends React.Component {
                 onChange={this.handleGenderChange}
               />
             </FormGroup>
+            <FormGroup label="Country">
+              <DropDown
+                labels={['Portugal', 'England', 'France', 'Germany', 'Spain', 'Other']}
+                name="country"
+                onChange={this.handleCountryChange}
+              />
+            </FormGroup>
           </form>
         </div>
         <div className="col-md-4">
           My name is {this.state.name}.
-          My password is {this.state.password}.
+          My gender is {this.state.gender}.
+          I am from {this.state.country}.
         </div>
       </div>
     );

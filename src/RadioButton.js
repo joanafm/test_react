@@ -6,6 +6,7 @@ const RadioButton = (props) => (
       return (
         <label className="radio-inline" key={index}>
           <input
+            value={label}
             type="radio"
             name={props.name}
             onChange={props.onChange}
