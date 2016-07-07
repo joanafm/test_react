@@ -4,6 +4,7 @@ import Input from './Input';
 import RadioButton from './RadioButton';
 import DropDown from './DropDown';
 import Button from './Button';
+import Alert from './Alert';
 
 class App extends React.Component {
 
@@ -11,7 +12,8 @@ class App extends React.Component {
     country: 'Portugal',
     gender: '',
     name: '',
-    password: ''
+    password: '',
+    submited: false
   }
 
   handleNameChange = (event) => {
@@ -31,6 +33,7 @@ class App extends React.Component {
   }
 
   submitData = () => {
+    this.setState({ submited: true });
     if (this.state.name === '') {
       console.log('The user did not set a name.');
     } if (this.state.password === '') {
@@ -42,6 +45,17 @@ class App extends React.Component {
         `name: ${this.state.name}, gender: ${this.state.gender}, country: ${this.state.country}`
       );
     }
+  }
+
+  handleAlert() {
+    if (this.state.name === '') {
+      return <Alert type="alert alert-danger" label="You need to write your name." />;
+    } else if (this.state.password === '') {
+      return <Alert type="alert alert-danger" label="You need to set a password." />;
+    } else if (this.state.gender === '') {
+      return <Alert type="alert alert-danger" label="You need to select your gender." />;
+    }
+    return <Alert type="alert alert-success" label="You can now submit your data." />;
   }
 
   renderText() {
@@ -114,6 +128,7 @@ class App extends React.Component {
               aria-expanded="true"
               onClick={this.submitData}
             >Submit</Button>
+            {this.handleAlert()}
           </form>
         </div>
         <div className="col-md-4">
