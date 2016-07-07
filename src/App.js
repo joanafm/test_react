@@ -52,6 +52,8 @@ class App extends React.Component {
       return <Alert type="alert alert-danger" label="You need to write your name." />;
     } else if (this.state.password === '') {
       return <Alert type="alert alert-danger" label="You need to set a password." />;
+    } else if (this.state.password !== '') {
+      // return <Alert type="alert alert-danger" label="VERIFICAR PASSWORD" />;
     } else if (this.state.gender === '') {
       return <Alert type="alert alert-danger" label="You need to select your gender." />;
     }

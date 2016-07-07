@@ -13,7 +13,7 @@ const Button = ({ children, styles, ...rest }) => {
 };
 
 Button.propTypes = {
-  children: React.PropTypes.string,
+  children: React.PropTypes.node.isRequired,
   styles: React.PropTypes.string
 };
 
