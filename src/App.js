@@ -8,11 +8,10 @@ import Button from './Button';
 class App extends React.Component {
 
   state = {
-    name: '',
-    gender: '',
-    password: '',
     country: 'Portugal',
-    sex: ''
+    gender: '',
+    name: '',
+    password: ''
   }
 
   handleNameChange = (event) => {
@@ -46,14 +45,31 @@ class App extends React.Component {
   }
 
   renderText() {
-    let text = `My name is ${this.state.name}.`;
+    const name = `My name is ${this.state.name}.`;
+    let gender = '';
+    let country = '';
     if (this.state.gender === 'Female') {
-      text += 'I am a girl.';
+      gender = 'I am a girl.';
     } else if (this.state.gender === 'Male') {
-      text += 'I am a boy.';
+      gender = 'I am a boy.';
     }
-    text += `I am from ${this.state.country}.`;
-    return text;
+    if (this.state.country === 'Other') {
+      country += 'My country is not in the list.';
+    } else {
+      country += `I am from ${this.state.country}.`;
+    }
+    return (
+      <span>
+        <p>
+          {name}
+        </p>
+        <p>
+          {gender}
+        </p>
+        <p>
+          {country}
+        </p>
+      </span>);
   }
 
   render() {
