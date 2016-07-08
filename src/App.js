@@ -14,7 +14,10 @@ class App extends React.Component {
     gender: '',
     name: '',
     password: '',
-    nameOnFocus: false
+    nameOnFocus: false,
+    pattLetterNumber: new RegExp('[^a-zA-Z0-9]'),
+    pattLetter: new RegExp('[a-zA-Z]'),
+    pattNumber: new RegExp('[0-9]')
   }
 
   handleNameChange = (event) => {
@@ -34,15 +37,12 @@ class App extends React.Component {
   }
 
   handleSubmitData = () => {
-    const patt1 = new RegExp('[^a-zA-Z0-9]');
-    const patt2 = new RegExp('[a-zA-Z]');
-    const patt3 = new RegExp('[0-9]');
     if (this.state.name === '' ||
       this.state.password === '' ||
-      patt1.test(this.state.password) ||
+      this.state.pattLetterNumber.test(this.state.password) ||
       this.state.password.length < 6 ||
-      !patt2.test(this.state.password) ||
-      !patt3.test(this.state.password) ||
+      !this.state.pattLetter.test(this.state.password) ||
+      !this.state.pattNumber.test(this.state.password) ||
       this.state.gender === ''
     ) {
       console.log('The login form is not complete.');
@@ -55,14 +55,11 @@ class App extends React.Component {
 
   handleAlertPassword() {
     if (this.state.password !== '') {
-      const patt1 = new RegExp('[^a-zA-Z0-9]');
-      const patt2 = new RegExp('[a-zA-Z]');
-      const patt3 = new RegExp('[0-9]');
       if (
-        patt1.test(this.state.password) ||
+        this.state.pattLetterNumber.test(this.state.password) ||
         this.state.password.length < 6 ||
-        !patt2.test(this.state.password) ||
-        !patt3.test(this.state.password)
+        !this.state.pattLetter.test(this.state.password) ||
+        !this.state.pattNumber.test(this.state.password)
       ) {
         return (
           <Alert
