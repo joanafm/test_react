@@ -1,10 +1,19 @@
 import React from 'react';
 
-const Glyphicon = (props) =>
-  <span className={props.className} aria-hidden="true" />;
+// glyphicon glyphicon-
+
+const Glyphicon = ({ style }) => {
+  const addStyle = () => {
+    const baseStyle = `glyphicon glyphicon-${style}`;
+    return baseStyle;
+  };
+  return (
+    <span className={addStyle()} aria-hidden="true" />
+  );
+};
 
 Glyphicon.propTypes = {
-  className: React.PropTypes.string.isRequired,
+  style: React.PropTypes.string.isRequired,
 };
 
 export default Glyphicon;

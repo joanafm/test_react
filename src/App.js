@@ -6,6 +6,7 @@ import DropDown from './DropDown';
 import Button from './Button';
 import Alert from './Alert';
 import Glyphicon from './Glyphicon';
+import { isValidPassword, isValidName, isValidGender } from './lib/validation';
 
 class App extends React.Component {
 
@@ -13,11 +14,7 @@ class App extends React.Component {
     country: 'Portugal',
     gender: '',
     name: '',
-    password: '',
-    nameOnFocus: false,
-    pattLetterNumber: new RegExp('[^a-zA-Z0-9]'),
-    pattLetter: new RegExp('[a-zA-Z]'),
-    pattNumber: new RegExp('[0-9]')
+    password: ''
   }
 
   handleNameChange = (event) => {
@@ -37,13 +34,9 @@ class App extends React.Component {
   }
 
   handleSubmitData = () => {
-    if (this.state.name === '' ||
-      this.state.password === '' ||
-      this.state.pattLetterNumber.test(this.state.password) ||
-      this.state.password.length < 6 ||
-      !this.state.pattLetter.test(this.state.password) ||
-      !this.state.pattNumber.test(this.state.password) ||
-      this.state.gender === ''
+    if (!isValidName(this.state.name) ||
+      !isValidPassword(this.state.password) ||
+      !isValidGender(this.state.gender)
     ) {
       console.log('The login form is not complete.');
     } else {
@@ -54,7 +47,7 @@ class App extends React.Component {
   }
 
   handleAlertName() {
-    if (this.state.name === '') {
+    if (!isValidName(this.state.name)) {
       return (
         <Alert
           type="alert alert-danger"
@@ -65,32 +58,19 @@ class App extends React.Component {
   }
 
   handleAlertPassword() {
-    if (this.state.password === '') {
+    if (!isValidPassword(this.state.password)) {
       return (
         <Alert
           type="alert alert-danger"
-          label="Your need to set a password."
+          label="Your password needs to have at least 6
+            characters, and can only contain letters and numbers."
         />);
-    } else if (this.state.password !== '') {
-      if (
-        this.state.pattLetterNumber.test(this.state.password) ||
-        this.state.password.length < 6 ||
-        !this.state.pattLetter.test(this.state.password) ||
-        !this.state.pattNumber.test(this.state.password)
-      ) {
-        return (
-          <Alert
-            type="alert alert-danger"
-            label="Your password needs to have at least 6
-              characters, and can only contain letters and numbers."
-          />);
-      }
     }
     return '';
   }
 
   handleAlertGender() {
-    if (this.state.gender === '') {
+    if (!isValidGender(this.state.gender)) {
       return (
         <Alert
           type="alert alert-danger"
@@ -118,7 +98,7 @@ class App extends React.Component {
       <span>
         <div id="glyphicon">
           <Glyphicon
-            className="glyphicon glyphicon-user"
+            style="user"
           /> <b>Your Information:</b>
         </div>
         <p>
@@ -178,7 +158,7 @@ class App extends React.Component {
                 aria-haspopup="true"
                 aria-expanded="true"
                 onClick={this.handleSubmitData}
-              >Submit <Glyphicon className="glyphicon glyphicon-ok" /></Button>
+              >Submit <Glyphicon className="ok" /></Button>
             </div>
           </form>
         </div>

@@ -1,9 +1,10 @@
 import React from 'react';
+import Glyphicon from './Glyphicon';
 
 const FormGroup = ({ label, children }) =>
   <div className="form-group">
     <label>
-      <span className="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+      <Glyphicon style="asterisk" />
       {label}
     </label>
     {children}

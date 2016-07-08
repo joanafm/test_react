@@ -46,7 +46,7 @@ class Dropdown extends React.Component {
           aria-expanded="true"
           styles="dropdown-toggle"
         >
-          <Glyphicon className="glyphicon glyphicon-flag" /> {this.state.country}
+          <Glyphicon style="flag" /> {this.state.country}
           <span className="caret"></span>
         </Button>
         <ul
