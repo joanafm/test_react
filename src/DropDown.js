@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button';
+import Glyphicon from './Glyphicon';
 
 class Dropdown extends React.Component {
 
@@ -45,7 +46,7 @@ class Dropdown extends React.Component {
           aria-expanded="true"
           styles="dropdown-toggle"
         >
-          {this.state.country}
+          <Glyphicon className="glyphicon glyphicon-flag" /> {this.state.country}
           <span className="caret"></span>
         </Button>
         <ul

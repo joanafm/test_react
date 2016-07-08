@@ -5,6 +5,7 @@ import RadioButton from './RadioButton';
 import DropDown from './DropDown';
 import Button from './Button';
 import Alert from './Alert';
+import Glyphicon from './Glyphicon';
 
 class App extends React.Component {
 
@@ -12,7 +13,8 @@ class App extends React.Component {
     country: 'Portugal',
     gender: '',
     name: '',
-    password: ''
+    password: '',
+    nameOnFocus: false
   }
 
   handleNameChange = (event) => {
@@ -43,7 +45,7 @@ class App extends React.Component {
       !patt3.test(this.state.password) ||
       this.state.gender === ''
     ) {
-      console.log('The login form has errors.');
+      console.log('The login form is not complete.');
     } else {
       console.log(
         `name: ${this.state.name}, gender: ${this.state.gender}, country: ${this.state.country}`
@@ -51,23 +53,8 @@ class App extends React.Component {
     }
   }
 
-  handleAlertName() {
-    if (this.state.name === '') {
-      return <Alert type="alert alert-danger" label="You need to write your name." />;
-    }
-    return '';
-  }
-
   handleAlertPassword() {
-    if (this.state.password === '') {
-      return (
-        <Alert
-          type="alert alert-danger"
-          label="You need to set a password. Your password needs to
-          have at least 6 characters, and can only contain letters and numbers."
-        />
-      );
-    } else if (this.state.password !== '') {
+    if (this.state.password !== '') {
       const patt1 = new RegExp('[^a-zA-Z0-9]');
       const patt2 = new RegExp('[a-zA-Z]');
       const patt3 = new RegExp('[0-9]');
@@ -88,13 +75,6 @@ class App extends React.Component {
     return '';
   }
 
-  handleAlertGender() {
-    if (this.state.gender === '') {
-      return <Alert type="alert alert-danger" label="You need to select your gender." />;
-    }
-    return '';
-  }
-
   renderText() {
     const name = `My name is ${this.state.name}.`;
     let gender = '';
@@ -111,6 +91,11 @@ class App extends React.Component {
     }
     return (
       <span>
+        <div id="glyphicon">
+          <Glyphicon
+            className="glyphicon glyphicon-user"
+          /> <b>Your Information:</b>
+        </div>
         <p>
           {name}
         </p>
@@ -136,7 +121,6 @@ class App extends React.Component {
                 placeholder="Name"
                 onChange={this.handleNameChange}
               />
-              {this.handleAlertName()}
             </FormGroup>
             <FormGroup label="Password">
               <Input
@@ -153,7 +137,6 @@ class App extends React.Component {
                 name="gender"
                 onChange={this.handleGenderChange}
               />
-              {this.handleAlertGender()}
             </FormGroup>
             <FormGroup label="Country">
               <DropDown
@@ -164,11 +147,11 @@ class App extends React.Component {
             </FormGroup>
             <div id="submitButton">
               <Button
-                id="dropdownMenu1"
+                id="submit"
                 aria-haspopup="true"
                 aria-expanded="true"
                 onClick={this.handleSubmitData}
-              >Submit</Button>
+              >Submit <Glyphicon className="glyphicon glyphicon-ok" /></Button>
             </div>
           </form>
         </div>

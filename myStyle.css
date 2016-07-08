@@ -1,43 +1,69 @@
 body{
   font-family: "Verdana", Geneva, sans-serif;
+  background-color: lightgrey;
 }
 
 form{
   margin-top: 25px;
   margin-bottom: 25px;
-  background-color: #F0F8FF;
-  border-radius: 15px;
-  border: 2px solid #F08080;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 1px #888888;
   padding: 50px;
 }
 
 .form-group, #submitButton{
-  margin-top: 50px;
+  padding: 50px;
+  border-top: 2px solid lightgrey;
+}
+
+.form-control{
+  border-radius: 0px;
+}
+
+.form-control:focus{
+  background-color: lightgrey;
+}
+
+.alert{
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
 }
 
 .btn{
-  border: 2px solid #F08080;
+  background-color: grey;
+  color: white;
+  width: 150px;
+}
+
+#submit{
+  background-color: green;
+}
+
+#submitButton{
+  text-align: right;
 }
 
 .dropdown-menu{
-  background: linear-gradient(to right, #F0F8FF, #F08080);
   padding: 10px;
   font-size: 16px;
   border-radius: 2px;
-  border: 2px solid #F08080;
   overflow: auto;
   height: 100px;
 }
 
 #finalText{
   position: fixed;
+  width: 400px;
   margin-top: 200px;
-  margin-left: 50px;
-  width: 300px;
   text-align: center;
   font-size: 16px;
-  background-color: #F0F8FF;
-  border-radius: 15px;
-  border: 2px solid #F08080;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 1px #888888;
   padding: 50px;
+}
+
+#glyphicon{
+  margin-bottom: 10px;
 }
