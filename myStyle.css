@@ -26,9 +26,16 @@ form{
 }
 
 .alert{
+  display: none;
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
 }
+
+.form-control:hover + .alert {
+  display: block;
+}
+
+.radio:hover + .alert { display: block; }
 
 .btn{
   background-color: #333333;

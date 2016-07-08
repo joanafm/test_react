@@ -53,8 +53,25 @@ class App extends React.Component {
     }
   }
 
+  handleAlertName() {
+    if (this.state.name === '') {
+      return (
+        <Alert
+          type="alert alert-danger"
+          label="Your need to write your name."
+        />);
+    }
+    return '';
+  }
+
   handleAlertPassword() {
-    if (this.state.password !== '') {
+    if (this.state.password === '') {
+      return (
+        <Alert
+          type="alert alert-danger"
+          label="Your need to set a password."
+        />);
+    } else if (this.state.password !== '') {
       if (
         this.state.pattLetterNumber.test(this.state.password) ||
         this.state.password.length < 6 ||
@@ -68,6 +85,17 @@ class App extends React.Component {
               characters, and can only contain letters and numbers."
           />);
       }
+    }
+    return '';
+  }
+
+  handleAlertGender() {
+    if (this.state.gender === '') {
+      return (
+        <Alert
+          type="alert alert-danger"
+          label="Your need to choose your gender."
+        />);
     }
     return '';
   }
@@ -118,6 +146,7 @@ class App extends React.Component {
                 placeholder="Name"
                 onChange={this.handleNameChange}
               />
+              {this.handleAlertName()}
             </FormGroup>
             <FormGroup label="Password">
               <Input
@@ -134,6 +163,7 @@ class App extends React.Component {
                 name="gender"
                 onChange={this.handleGenderChange}
               />
+              {this.handleAlertGender()}
             </FormGroup>
             <FormGroup label="Country">
               <DropDown
