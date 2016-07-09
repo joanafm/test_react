@@ -17,10 +17,6 @@ export function isValidPassword(input) {
   return true;
 }
 
-export function isValidName(name) {
-  return name !== '';
-}
-
-export function isValidGender(gender) {
-  return gender !== '';
+export function isEmpty(input) {
+  return input !== '';
 }

@@ -6,7 +6,7 @@ import DropDown from './DropDown';
 import Button from './Button';
 import Alert from './Alert';
 import Glyphicon from './Glyphicon';
-import { isValidPassword, isValidName, isValidGender } from './lib/validation';
+import { isValidPassword, isEmpty } from './lib/validation';
 
 class App extends React.Component {
 
@@ -50,7 +50,7 @@ class App extends React.Component {
 
   handleSubmitData = () => {
     let valid = true;
-    if (!isValidName(this.state.name)) {
+    if (!isEmpty(this.state.name)) {
       this.setState({ validateName: true });
       valid = false;
     }
@@ -58,7 +58,7 @@ class App extends React.Component {
       this.setState({ validatePassword: true });
       valid = false;
     }
-    if (!isValidName(this.state.gender)) {
+    if (!isEmpty(this.state.gender)) {
       this.setState({ validateGender: true });
       valid = false;
     }
@@ -72,7 +72,7 @@ class App extends React.Component {
   }
 
   handleAlertName() {
-    if (this.state.validateName && !isValidName(this.state.name)) {
+    if (this.state.validateName && !isEmpty(this.state.name)) {
       return (
         <Alert
           style="danger"
@@ -95,7 +95,7 @@ class App extends React.Component {
   }
 
   handleAlertGender() {
-    if (this.state.validateGender && !isValidGender(this.state.gender)) {
+    if (this.state.validateGender && !isEmpty(this.state.gender)) {
       return (
         <Alert
           style="danger"
