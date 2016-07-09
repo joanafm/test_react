@@ -10,6 +10,7 @@ const RadioButton = (props) => (
             type="radio"
             name={props.name}
             onChange={props.onChange}
+            onBlur={props.onBlur}
           /> {label}
         </label>
       );
@@ -20,7 +21,8 @@ const RadioButton = (props) => (
 RadioButton.propTypes = {
   labels: React.PropTypes.array.isRequired,
   name: React.PropTypes.string.isRequired,
-  onChange: React.PropTypes.func.isRequired
+  onChange: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired
 };
 
 export default RadioButton;

@@ -14,7 +14,22 @@ class App extends React.Component {
     country: 'Portugal',
     gender: '',
     name: '',
-    password: ''
+    password: '',
+    validateName: false,
+    validatePassword: false,
+    validateGender: false
+  }
+
+  handleNameBlur = () => {
+    this.setState({ validateName: true });
+  }
+
+  handlePasswordBlur = () => {
+    this.setState({ validatePassword: true });
+  }
+
+  handleGenderBlur = () => {
+    this.setState({ validateGender: true });
   }
 
   handleNameChange = (event) => {
@@ -34,10 +49,20 @@ class App extends React.Component {
   }
 
   handleSubmitData = () => {
-    if (!isValidName(this.state.name) ||
-      !isValidPassword(this.state.password) ||
-      !isValidGender(this.state.gender)
-    ) {
+    let valid = true;
+    if (!isValidName(this.state.name)) {
+      this.setState({ validateName: true });
+      valid = false;
+    }
+    if (!isValidPassword(this.state.password)) {
+      this.setState({ validatePassword: true });
+      valid = false;
+    }
+    if (!isValidName(this.state.gender)) {
+      this.setState({ validateGender: true });
+      valid = false;
+    }
+    if (!valid) {
       console.log('The login form is not complete.');
     } else {
       console.log(
@@ -47,37 +72,37 @@ class App extends React.Component {
   }
 
   handleAlertName() {
-    if (!isValidName(this.state.name)) {
+    if (this.state.validateName && !isValidName(this.state.name)) {
       return (
         <Alert
-          type="alert alert-danger"
+          style="danger"
           label="Your need to write your name."
         />);
     }
-    return '';
+    return null;
   }
 
   handleAlertPassword() {
-    if (!isValidPassword(this.state.password)) {
+    if (this.state.validatePassword && !isValidPassword(this.state.password)) {
       return (
         <Alert
-          type="alert alert-danger"
+          style="danger"
           label="Your password needs to have at least 6
             characters, and can only contain letters and numbers."
         />);
     }
-    return '';
+    return null;
   }
 
   handleAlertGender() {
-    if (!isValidGender(this.state.gender)) {
+    if (this.state.validateGender && !isValidGender(this.state.gender)) {
       return (
         <Alert
-          type="alert alert-danger"
+          style="danger"
           label="Your need to choose your gender."
         />);
     }
-    return '';
+    return null;
   }
 
   renderText() {
@@ -125,6 +150,7 @@ class App extends React.Component {
                 className="form-control"
                 placeholder="Name"
                 onChange={this.handleNameChange}
+                onBlur={this.handleNameBlur}
               />
               {this.handleAlertName()}
             </FormGroup>
@@ -134,6 +160,7 @@ class App extends React.Component {
                 className="form-control"
                 placeholder="Password"
                 onChange={this.handlePasswordChange}
+                onBlur={this.handlePasswordBlur}
               />
               {this.handleAlertPassword()}
             </FormGroup>
@@ -142,6 +169,7 @@ class App extends React.Component {
                 labels={['Female', 'Male', 'Other']}
                 name="gender"
                 onChange={this.handleGenderChange}
+                onBlur={this.handleGenderBlur}
               />
               {this.handleAlertGender()}
             </FormGroup>
@@ -158,7 +186,7 @@ class App extends React.Component {
                 aria-haspopup="true"
                 aria-expanded="true"
                 onClick={this.handleSubmitData}
-              >Submit <Glyphicon className="ok" /></Button>
+              >Submit <Glyphicon style="ok" /></Button>
             </div>
           </form>
         </div>

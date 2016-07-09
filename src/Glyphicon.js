@@ -1,7 +1,5 @@
 import React from 'react';
 
-// glyphicon glyphicon-
-
 const Glyphicon = ({ style }) => {
   const addStyle = () => {
     const baseStyle = `glyphicon glyphicon-${style}`;
